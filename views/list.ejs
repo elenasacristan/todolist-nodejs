@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+
+    <div class="dropdown box">
+        <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            See your lists
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <%lists.forEach(function(list){%>
+            <a href="<%=list.name%>" class="dropdown-item"><%=list.name%></a>
+            <%})%>
+        </div>
+    </div>
+
+
+    <div class="box" id="heading">
+        <h1><%= listTitle  %></h1>
+    </div>
+
+    <div class="box">
+
+        <% tasks.forEach(function(task){ %>
+        <form action="/delete" method="POST">
+            <div class="item">
+                <input type="checkbox" name="checkbox" value="<%= task._id %>" onChange="this.form.submit()">
+                <p><%= task.name %></p>
+                <input type="hidden" name="listTitle" value=<%= listTitle  %>>
+            </div>
+        </form>
+        <%})%>
+
+
+        <form class="item" action="/" method="POST">
+            <input type="text" name="new_item" placeholder="New item" autocomplete="off">
+            <button class="add-button" type="submit" name="list" value=<%= listTitle  %>>+</button>
+        </form>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
